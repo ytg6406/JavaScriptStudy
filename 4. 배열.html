@@ -170,39 +170,58 @@
         </div>
         
         <script>
-               
+               var arr1 = ["일", "이","십"];
+               console.log(arr1.length); //3
+
+               //프로퍼티 동적 생성
+               arr1.test = "test1";
+               arr1.sample="sample1";
+               console.log("arr1.length::::",arr1.length); //3
         </script>
 	<div>
 		<pre>
-                * 배열과 객체
+                * 배열에서 프로퍼티 동적 생성
                         /* 테스트소스 */
-                        var arrayTest = ["1","2","3"];
-                        var objectTest = {
-                                "1":"11",
-                                "2":"22",
-                                "3":"33"
-                        }
-                        console.log("arrayTest[0]:::",arrayTest[0]);        // 1
-                        console.log("arrayTest[1]:::",arrayTest[1]);        // 2
-                        console.log("arrayTest[2]:::",arrayTest[2]);        // 3
+                        var arr1 = ["일", "이","십"];
+                        console.log(arr1.length); //3
+         
+                        //프로퍼티 동적 생성
+                        arr1.test = "test1";
+                        arr1.sample="sample1";
+                        console.log("arr1.length::::",arr1.length); //3
 
-                        ** key 값은 "" string 타입으로 들어가야 하지만 자바스크립트 엔진에서 [] 안에 숫자형태가 들어오면 자동으로 문자로 변경해준다.
-                        console.log("objectTest[1]:::",objectTest[1]);      // 11
-                        console.log("objectTest[2]:::",objectTest[2]);      // 22
-                        console.log("objectTest[3]:::",objectTest[3]);      // 33
-
-                        ** array, object 로 다르지만 typeof 로 확인을 해보면 둘다 object 로 반환한다.
-                        console.log("typeof arrayTest:::::",typeof arrayTest);  // object
-                        console.log("typeof objectTest::::",typeof objectTest); // object
-                        -> 이는 자바스크립트가 배열도 object로 인식한다는 것을 알 수 있다.
-                        -> 다만 차이점으로는 objectTest는 length 프로퍼티가 존재 하지 않는 것이고, arrayTest는 length 프로퍼티가 존재한다는 것이다.
-                           이 부분이 배열과 오브젝트의 차이점 중 하나이다.
-                        -> 또한 배열의 경우 push 메소드를 사용할 수 있지만 오브젝트의 경우에는 사용이 불가하다.
-                        -> 이를 관계도로 본다면 아래와 같다.
-                                객체 --> Object.prototype
-                                배열 --> Array.prototype --> Object.prototype
+                        ** 동적으로 프로퍼티를 추가하는 경우에도 length의 값은 변경이 없는 것을 확인 할 수 있다.
+                           이러한 현상이 나타나는 원인은 배열의 length프로퍼티는 배열 원소의 가장 큰 인덱스가 변하는 경우에만 변경되는 것을 알 수 있다.
 
 		</pre>
-	</div>
+        </div>
+        
+        <script>
+                for(var prop in arr1){
+                        console.log("prop::::", prop, ", arr1[prop]::::",arr1[prop]);
+                }
+
+                for(var i=0;i<arr1.length;i++){
+                        console.log("i::::", i, ", arr1[i]::::",arr1[i]);
+                }
+         </script>
+         <div>
+                 <pre>
+                 * 배열의 프로퍼티 열거
+                         /* 테스트소스 */
+                         for(var prop in arr1){
+                                console.log("prop::::", prop, ", arr1[prop]::::",arr1[prop]);
+                        }
+        
+                        for(var i=0;i < arr1.length;i++){
+                                console.log("i::::", i, ", arr1[i]::::",arr1[i]);
+                        }
+
+                        ** for in 문을 사용 할 때와 for 문을 사용했을 때의 나오는 값이 다르다.
+                           for in 문의 경우 모든 프로퍼티를 나오게 하는 반면에 for문은 인덱스 번호를 가진 프로퍼티만 가져오는 것이 다르다.
+                           for in 문을 사용하는 경우 실제 프로젝트 지원시에 불필요한 값들이 나오는 바람에 고객사에서 제품에서 나오는 버그로 보고 지원 요청을 한 경우가 있었다.
+ 
+                 </pre>
+         </div>
   </body>
 </html>
