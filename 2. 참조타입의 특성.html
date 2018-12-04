@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>참조 타입의 특성</title>
+    <style>
+      .titleHeader{
+        margin-left: 3%;
+      }
+    </style>
+  </head>
+  <body>
+	<div>
+	        <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;참조 타입의 특성</h3>
+		<pre>
+		숫자, 불린값, 문자열, undefined, null을 제외한 모든 값은 객체다.
+                배열 및 함수도 객체로 취급된다.
+                이러한 객체는 자바스크립트에서 참조 타입이라고 부른다. 모든 연산이 실제 값이 아닌 참조 값으로 처리되기 때문이다.
+		</pre>
+	</div>
+
+        <script>
+                var objA = {
+                        val : 50
+                }
+
+                var objB = objA;
+                console.log(objA.val);
+                console.log(objB.val);
+
+                objB.val = 700;
+                console.log(objA.val);
+                console.log(objB.val);
+        </script>
+	<div>
+		<pre>
+		숫자, 불린값, 문자열, undefined, null을 제외한 모든 값은 객체다.
+                배열 및 함수도 객체로 취급된다.
+                이러한 객체는 자바스크립트에서 참조 타입이라고 부른다. 모든 연산이 실제 값이 아닌 참조 값으로 처리되기 때문이다.
+
+                var objA = {
+                        val : 50
+                }
+
+                var objB = objA;
+                console.log(objA.val); -> 50
+                console.log(objB.val); -> 50
+
+                objB.val = 700;
+                console.log(objA.val); -> 700
+                console.log(objB.val); -> 700
+
+                1. objA 변수는 객체 자체를 저장하는 것이 아닌 생성된 객체를 가리키는 참조값을 저장하고 있다.
+                2. var objB = objA;는 값을 넘기는 것이 아닌 값을 저장한 객체의 참조값을 저장하는 것이다.
+                3. 고로 objB.val = 700; 으로 변경하면 같은 객체를 참고한 objA의 값도 변경이 되는 것이다.
+		</pre>
+	</div>
+
+        <script>
+          var a = 100;
+          var b = 100;
+          var c = a;
+
+          var objA1 = { value : 100};
+          var objB1 = { value : 100};
+          var objC = objA1;
+
+          console.log("a == b:::::",a == b);
+          console.log("a == c:::::",a == c);
+          console.log("b == c:::::",b == c);
+
+          console.log("objA1 == objB1:::::",objA1 == objB1);
+          console.log("objA1 == objB1:::value::",objA1.value == objB1.value);
+          console.log("objC == objB1:::::",objC == objB1);
+          console.log("objC == objA1:::::",objC == objA1);
+        </script>
+    	<div>
+    		<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;객체 비교</h3>
+    		<pre>
+    		*** 동등 연산자(==)를 비교할 떄도 값이 아닌 참조값을 비교한다.
+
+                var a = 100;
+                var b = 100;
+                var c = a;
+
+                var objA1 = { value : 100};
+                var objB1 = { value : 100};
+                var objC = objA1;
+
+                console.log("a == b:::::",a == b); -> true
+                console.log("a == c:::::",a == c); -> true
+                console.log("b == c:::::",b == c); -> true
+
+                console.log("objA1 == objB1:::::",objA1 == objB1); -> false
+                console.log("objA1 == objB1:::value::",objA1.value == objB1.value); -> true
+                console.log("objC == objB1:::::",objC == objB1); -> false
+                console.log("objC == objA1:::::",objC == objA1); -> true
+
+                1. a와 b는 100이라는 값을 저장한 기본 타입의 변수다.
+                   동등 연산자를 이용하는 경우 기본 타입은 값을 비교한다.
+                2. objA1 와 objB1의 경우 참조 값이 달라서 값은 같아도 false로 본다.
+    		</pre>
+    	</div>
+        <script>
+                var objA3 = {val : 100}
+
+                var callByValueVal = 100;
+
+                function changArg(num, obj) {
+                        num = 200;
+                        objA3.val = 200;
+
+                        console.log("changArg:::", num);//200
+                        console.log("changArg:::", obj);//200
+                }
+
+                changArg(callByValueVal, objA3);
+                console.log("callByValueVal::::",callByValueVal);//100
+                console.log("objA3:::::",objA3);//200
+        </script>
+        <div>
+    		<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;참조에 의한 함수 호출 방식</h3>
+    		<pre>
+    		1. 기본 타입의 경우 값에 의한 호출(call by value). 함수 호출시 복사된 값을 호출.
+                2. 참조 타입의 경우 참조에 의한 호출(call by refrence). 함수 호출시 객체의 참조값이 전달된다.
+
+                var objA3 = {val : 100}
+
+                var callByValueVal = 100;
+
+                function changArg(num, obj) {
+                        num = 200;
+                        objA3.val = 200;
+
+                        console.log("changArg:::", num);//200
+                        console.log("changArg:::", obj);//200
+                }
+
+                changArg(callByValueVal, objA3);
+                console.log("callByValueVal::::",callByValueVal);//100
+                console.log("objA3:::::",objA3);//200
+
+                ** callByValueVal 값이 변경 되지 않은 것은 함수에 값만 전달한 것이기 때문이고, obj의 값이 변경된 이유는 객체의 위치를 보낸 것이기 때문이다.
+    		</pre>
+    	</div>
+  </body>
+</html>

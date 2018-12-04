@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>프로토타입</title>
+    <style>
+      .titleHeader{
+        margin-left: 3%;
+      }
+    </style>
+  </head>
+  <body>
+	<div>
+	        <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;프로토타입</h3>
+		<pre>
+		** 모든 객체는 자신의 부모 역활을 하는 객체와 연결이 되어 있다.(객체지향에서 상속의 개념과 유사)
+		</pre>
+	</div>
+
+        <script>
+                var foo = {
+                        name : "foo",
+                        age : 30
+                }
+
+                console.log(foo.toString());
+                console.dir(foo);
+        </script>
+	<div>
+		<pre>
+                var foo = {
+                        name : "foo",
+                        age : 30
+                }
+
+                console.log(foo.toString()); -> 1) [Object Object]
+                console.dir(foo); -> 2) 이미지 필요
+
+                1) foo 객체는 toString 메소드가 없기 때문에 실행이 되지 않는 것이 맞지만, foo 객체에 프로토타입으로 이미 선언이 되어 있기 때문에 실행이 가능하다.
+                2) 객체안에 _proto_ 프로퍼티가 있다. 이 _proto_ 안에 있는 것들이 프로토타입으로 선언이 되어 있는 것들이다.
+
+                * ECMA 명세서에 모든 객체는 자신의 프로토타입을 가리키는 [[prototype]]이라는 숨겨진 프로퍼티를 가진다 라고 명시되어 있다.
+                * [[prototype]] 이라는 것을 크롬에서는 _proto_라고 표현을 한다.
+                *  Object.prototype 객체에 표현된 메서드들은 자바스크립트 표준 메서드로 명세서에 정의되어 있다.
+
+		</pre>
+	</div>
+  </body>
+</html>
